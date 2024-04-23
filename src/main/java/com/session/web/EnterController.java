@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
-public class Controller {
+@RequestMapping("/enter")
+public class EnterController {
 
     @GetMapping(value = "/hello")
     public String hello(){

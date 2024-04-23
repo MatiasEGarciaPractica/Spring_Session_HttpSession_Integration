@@ -5,6 +5,6 @@ import org.springframework.session.web.context.AbstractHttpSessionApplicationIni
 public class ConfigLoader extends AbstractHttpSessionApplicationInitializer {
 
     public ConfigLoader(){
-        super(Config.class); //name of redis configuration class.
+        super(RedisConfig.class); //name of redis configuration class.
     }
 }

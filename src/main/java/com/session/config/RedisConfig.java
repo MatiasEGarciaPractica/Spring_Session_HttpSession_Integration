@@ -5,14 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
 @Configuration(proxyBeanMethods = false)
-@EnableRedisHttpSession
-public class Config {
+@EnableRedisIndexedHttpSession //to listen session events
+public class RedisConfig {
 
     @Value("${REDIS_CLOUD_HOST_NAME}")
     private String redisHostName;
@@ -31,17 +28,6 @@ public class Config {
         config.setPassword(redisPassword);
         config.setDatabase(redisDatabase);
         return new LettuceConnectionFactory(config);
-    }
-
-    /**
-     * For user in memory through basic authentication
-     */
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
-        http.httpBasic(Customizer.withDefaults());
-        http.formLogin(Customizer.withDefaults());
-        return http.build();
     }
 
 
